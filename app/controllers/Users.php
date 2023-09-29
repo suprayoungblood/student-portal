@@ -59,6 +59,7 @@ class Users extends Controller
 
                 if ($loggedInUser) {
                     $_SESSION['user_id'] = $loggedInUser->id;
+                    $_SESSION['user_name'] = $loggedInUser->name;  // Add this line
                     header('Location: ' . URLROOT . '/your_dashboard');
                 } else {
                     $data['password_err'] = 'Password incorrect';
