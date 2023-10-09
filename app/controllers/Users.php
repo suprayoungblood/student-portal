@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 class Users extends Controller
 {
     private $userModel;
@@ -17,14 +20,13 @@ class Users extends Controller
 
         $this->view('users/register', $data);
     }
-
     public function login()
     {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
             // Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             // Init data
             $data = [
@@ -47,25 +49,18 @@ class Users extends Controller
             // Check for user/email
             if ($this->userModel->findUserByEmail($data['email'])) {
                 // User found
-            } else {
-                // User not found
-                $data['email_err'] = 'No user found';
-            }
-
-            // Ensure errors are empty
-            if (empty($data['email_err']) && empty($data['password_err'])) {
-                // Validated
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-
                 if ($loggedInUser) {
+                    // Set session variables and redirect
                     $_SESSION['user_id'] = $loggedInUser->id;
-                    $_SESSION['user_name'] = $loggedInUser->name;  // Add this line
                     header('Location: ' . URLROOT . '/your_dashboard');
                 } else {
                     $data['password_err'] = 'Password incorrect';
                     $this->view('users/login', $data);
                 }
             } else {
+                // User not found
+                $data['email_err'] = 'No user found';
                 $this->view('users/login', $data);
             }
         } else {
@@ -75,10 +70,10 @@ class Users extends Controller
                 'email_err' => '',
                 'password_err' => ''
             ];
-
             $this->view('users/login', $data);
         }
     }
+
 
     public function logout()
     {
