@@ -8,7 +8,7 @@ define('DB_NAME', 'school-db');
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'http://localhost/schoolportal');
+define('URLROOT', 'http://localhost/student-portal/public');
 // Site Name
 define('SITENAME', 'SchoolPortal');
 // Logo
