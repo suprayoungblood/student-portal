@@ -14,7 +14,7 @@
           <label for="name">Name: <sup>*</sup></label>
           <input type="text" name="name"
             class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->name; ?>">
+            value="<?php echo $data['user']->Name; ?>">
           <span class="invalid-feedback"><?php echo $data['name_err']; ?></span>
         </div>
 
@@ -22,7 +22,7 @@
           <label for="email">Email:</label>
           <input type="email" name="email"
             class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->email; ?>">
+            value="<?php echo $data['user']->Email; ?>">
           <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
         </div>
 
@@ -30,11 +30,8 @@
           <label for="phone">Phone:</label>
           <input type="text" name="phone" maxlength="14"
             class="form-control form-control-lg <?php echo (!empty($data['phone_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->phone; ?>" oninput="applyPhoneMask(this)">
-          <span class="invalid-feedback"><?php echo $data['phone_err']; ?></span>
+            value="<?php echo $data['user']->Phone; ?>" oninput="applyPhoneMask(this)">
         </div>
-
-        <!-- You can add other fields here as needed -->
 
         <div class="row text-center">
           <div class="col">
