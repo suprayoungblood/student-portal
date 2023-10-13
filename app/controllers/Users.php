@@ -2,10 +2,14 @@
 class Users extends Controller
 {
     private $userModel;
+    private $courseModel;
+    private $enrollmentModel;
 
     public function __construct()
     {
-        $this->userModel = $this->model('User');
+        $this->userModel = $this->model('Users');
+        $this->courseModel = $this->model('Course');
+        $this->enrollmentModel = $this->model('Enrollment');
     }
 
     public function index()
@@ -22,9 +26,9 @@ class Users extends Controller
     {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Process form
             // Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $_POST['email'] = strip_tags($_POST['email']);
+            $_POST['password'] = strip_tags($_POST['password']);
 
             // Init data
             $data = [
@@ -58,8 +62,8 @@ class Users extends Controller
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
                 if ($loggedInUser) {
-                    $_SESSION['user_id'] = $loggedInUser->id;
-                    $_SESSION['user_name'] = $loggedInUser->name;  // Add this line
+                    $_SESSION['user_id'] = $loggedInUser->UserID;
+                    $_SESSION['user_name'] = $loggedInUser->Name;
                     header('Location: ' . URLROOT . '/your_dashboard');
                 } else {
                     $data['password_err'] = 'Password incorrect';
@@ -90,8 +94,11 @@ class Users extends Controller
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+            $_POST['name'] = strip_tags($_POST['name']);
+            $_POST['email'] = strip_tags($_POST['email']);
+            $_POST['phone'] = strip_tags($_POST['phone']);
+            $_POST['password'] = strip_tags($_POST['password']);
+            $_POST['confirm_password'] = strip_tags($_POST['confirm_password']);
             $data = [
                 'title' => 'Student Registration',
                 'description' => 'Fill out form to register as a student.',
@@ -154,10 +161,12 @@ class Users extends Controller
         }
 
         $user = $this->userModel->getUserById($_SESSION['user_id']);
+        $courses = $this->courseModel->getCoursesByStudent($_SESSION['user_id']);
 
         $data = [
             'title' => 'Profile',
-            'user' => $user
+            'user' => $user,
+            'courses' => $courses
         ];
 
         $this->view('pages/profile', $data);
@@ -182,14 +191,10 @@ class Users extends Controller
 
     public function update()
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: ' . URLROOT . '/users/login');
-            exit();
-        }
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            $_POST['name'] = strip_tags($_POST['name']);
+            $_POST['email'] = strip_tags($_POST['email']);
+            $_POST['phone'] = strip_tags($_POST['phone']);
             $data = [
                 'id' => $_SESSION['user_id'],
                 'name' => trim($_POST['name']),
@@ -239,6 +244,63 @@ class Users extends Controller
             }
         } else {
             header('Location: ' . URLROOT . '/users/profile');
+        }
+    }
+
+    public function viewCourses()
+    {
+        $courses = $this->courseModel->getAllCourses();
+
+        $data = [
+            'title' => 'Available Courses',
+            'courses' => $courses
+        ];
+
+        $this->view('users/viewCourses', $data);
+    }
+
+    public function registerCourse($courseID)
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ' . URLROOT . '/users/login');
+            exit();
+        }
+
+        if ($this->enrollmentModel->register($_SESSION['user_id'], $courseID)) {
+            header('Location: ' . URLROOT . '/users/registeredCourses');
+        } else {
+            die('Something went wrong with course registration');
+        }
+    }
+
+    public function registeredCourses()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ' . URLROOT . '/users/login');
+            exit();
+        }
+
+        $courses = $this->enrollmentModel->getCoursesByStudent($_SESSION['user_id']);
+
+        $data = [
+            'title' => 'Your Registered Courses',
+            'courses' => $courses
+        ];
+
+        $this->view('users/registeredCourses', $data);
+    }
+
+    public function unregisterCourse($courseID)
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ' . URLROOT . '/users/login');
+            exit();
+        }
+
+        if ($this->enrollmentModel->unregister($_SESSION['user_id'], $courseID)) {
+            header('Location: ' . URLROOT . '/users/registeredCourses');
+        } else {
+            die('Something went wrong with course unregistration');
         }
     }
 }

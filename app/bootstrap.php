@@ -1,10 +1,9 @@
 <?php
-session_start(); // Add this line to start the session
 
 // Load Config
-require_once 'config/config.php';
+require_once __DIR__ . '/config/config.php';
 
 // Autoload Core Libraries
-spl_autoload_register(function($className){
+spl_autoload_register(function ($className) {
   require_once 'libraries/' . $className . '.php';
 });
