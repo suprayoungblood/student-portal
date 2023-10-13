@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 10, 2023 at 12:42 AM
+-- Host: localhost
+-- Generation Time: Oct 13, 2023 at 06:21 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,6 +36,22 @@ CREATE TABLE `course` (
   `InstructorID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`CourseID`, `CourseName`, `Semester`, `EnrollmentLimit`, `EnrollmentCount`, `InstructorID`) VALUES
+(9, 'Introduction to Computer Science', 'Fall 2023', 100, 0, NULL),
+(10, 'Calculus I', 'Fall 2023', 120, 0, NULL),
+(11, 'Calculus II', 'Spring 2024', 120, 0, NULL),
+(12, 'Physics: Mechanics', 'Fall 2023', 80, 0, NULL),
+(13, 'Chemistry Fundamentals', 'Spring 2024', 90, 0, NULL),
+(14, 'Literature of the 19th Century', 'Fall 2023', 70, 0, NULL),
+(15, 'World History', 'Spring 2024', 100, 0, NULL),
+(16, 'Biology 101', 'Fall 2023', 100, 0, NULL),
+(17, 'Introduction to Psychology', 'Spring 2024', 110, 0, NULL),
+(18, 'Economics Principles', 'Fall 2023', 80, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +78,13 @@ CREATE TABLE `user` (
   `Password` varchar(255) DEFAULT NULL,
   `UserType` enum('Student','Administrator','Instructor') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserID`, `Name`, `Phone`, `Email`, `Password`, `UserType`) VALUES
+(1, 'test', '(222)222-2222', 'test@test.com', '$2y$10$r9GlTJMqsGpZufxuF3adz.sI./mCHpCr/C76xMSBRa0XpXjK85vd.', NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +140,7 @@ ALTER TABLE `waitinglist`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `enrollment`
@@ -129,7 +152,7 @@ ALTER TABLE `enrollment`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `waitinglist`

@@ -11,6 +11,12 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
         </li>
+        <?php if (isset($_SESSION['user_id'])) : ?>
+        <!-- Display course link only to logged-in users -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo URLROOT; ?>/pages/course">Courses</a>
+        </li>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/pages/contact">Contact Us</a>
         </li>

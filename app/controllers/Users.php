@@ -2,10 +2,13 @@
 class Users extends Controller
 {
     private $userModel;
+    private $courseModel;
+
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->courseModel = $this->model('Course');
     }
 
     public function index()
@@ -16,6 +19,30 @@ class Users extends Controller
         ];
 
         $this->view('users/register', $data);
+    }
+
+    public function displayCourses()
+    {
+        $courses = $this->courseModel->getAllCourses();
+
+        $data = [
+            'title' => 'All Courses',
+            'courses' => $courses
+        ];
+
+        $this->view('pages/course', $data);
+    }
+
+    public function registerForCourse()
+    {
+        $courses = $this->courseModel->getAllCourses();
+
+        $data = [
+            'title' => 'Register for Courses',
+            'courses' => $courses
+        ];
+
+        $this->view('users/register_for_course', $data);
     }
 
     public function login()

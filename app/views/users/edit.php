@@ -12,25 +12,19 @@
 
         <div class="form-group">
           <label for="name">Name: <sup>*</sup></label>
-          <input type="text" name="name"
-            class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->Name; ?>">
+          <input type="text" name="name" class="form-control form-control-lg <?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['user']->Name; ?>">
           <span class="invalid-feedback"><?php echo $data['name_err']; ?></span>
         </div>
 
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" name="email"
-            class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->Email; ?>">
+          <input type="email" name="email" class="form-control form-control-lg <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['user']->Email; ?>">
           <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone:</label>
-          <input type="text" name="phone" maxlength="14"
-            class="form-control form-control-lg <?php echo (!empty($data['phone_err'])) ? 'is-invalid' : ''; ?>"
-            value="<?php echo $data['user']->Phone; ?>" oninput="applyPhoneMask(this)">
+          <input type="text" name="phone" maxlength="14" class="form-control form-control-lg <?php echo (!empty($data['phone_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['user']->Phone; ?>" oninput="applyPhoneMask(this)">
         </div>
 
         <div class="row text-center">
