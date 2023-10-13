@@ -9,7 +9,10 @@ class Controller
   public function model($model)
   {
     // Create the path to the model
-    $modelPath = '../app/models/' . $model . '.php';
+    $modelPath = APPROOT . '/models/' . $model . '.php';
+
+    // Displaying the model path
+    echo "Checking for file: " . $modelPath . "<br>";
 
     // Check if the file exists
     if (file_exists($modelPath)) {
@@ -25,18 +28,16 @@ class Controller
   }
 
   // Load view
-  // Load view
   public function view($view, $data = [])
   {
-    // Extract the data array to variables
-    extract($data);
+    // Create the full path for the view
+    $viewPath = APPROOT . '/views/' . $view . '.php';
 
-    // Check for view file
-    if (file_exists('../app/views/' . $view . '.php')) {
-      require_once '../app/views/' . $view . '.php';
+    // Check if the view file exists
+    if (file_exists($viewPath)) {
+      require_once $viewPath;
     } else {
-      // View does not exist
-      die('View does not exist');
+      die("View file does not exist: " . $viewPath);
     }
   }
 }

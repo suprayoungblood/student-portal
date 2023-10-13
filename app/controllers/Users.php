@@ -35,14 +35,36 @@ class Users extends Controller
 
     public function registerForCourse()
     {
-        $courses = $this->courseModel->getAllCourses();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $courseId = $_POST['course_id'];
+            $userId = $_SESSION['user_id'];
 
-        $data = [
-            'title' => 'Register for Courses',
-            'courses' => $courses
-        ];
+            // Check if the user is already registered for this course
+            if ($this->courseModel->isUserRegistered($userId, $courseId)) {
+                // Show some error message or handle this case
+                return;
+            }
 
-        $this->view('users/register_for_course', $data);
+            // Check if the course has available seats
+            if (!$this->courseModel->hasAvailableSeats($courseId)) {
+                // Add the user to the waiting list
+                // $this->courseModel->addToWaitingList($userId, $courseId);
+                // Show a message to the user about the waiting list
+                return;
+            }
+
+            // Register the user for the course
+            if ($this->courseModel->registerUser($userId, $courseId)) {
+                // Update enrollment count for the course
+                $this->courseModel->incrementEnrollmentCount($courseId);
+                // Redirect or show a success message
+                header('Location: ' . URLROOT . '/pages/course');
+            } else {
+                // Handle the error
+            }
+        } else {
+            header('Location: ' . URLROOT . '/pages/course');
+        }
     }
 
     public function login()
@@ -186,13 +208,18 @@ class Users extends Controller
 
         $user = $this->userModel->getUserById($_SESSION['user_id']);
 
+        // Fetch enrolled courses
+        $enrolledCourses = $this->courseModel->getEnrolledCoursesByUserId($_SESSION['user_id']);
+
         $data = [
             'title' => 'Profile',
-            'user' => $user
+            'user' => $user,
+            'enrolledCourses' => $enrolledCourses // Add this line
         ];
 
-        $this->view('pages/profile', $data);
+        $this->view('users/profile', $data);
     }
+
 
     public function edit()
     {

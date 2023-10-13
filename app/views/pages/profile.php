@@ -10,10 +10,19 @@
       <p class="card-text"><strong>Email:</strong> <?php echo $data['user']->Email; ?></p>
       <p class="card-text"><strong>Phone:</strong> <?php echo $data['user']->Phone; ?></p>
 
-      <a href="<?php echo URLROOT; ?>/users/edit" class="btn btn-primary">Edit Profile</a>
+      <!-- Display Enrolled Courses -->
+      <h5 class="mt-4">Enrolled Courses:</h5>
+      <ul>
+        <?php if (!empty($data['enrolledCourses'])) : ?>
+        <?php foreach ($data['enrolledCourses'] as $course) : ?>
+        <li><?php echo $course->CourseName . " (" . $course->Semester . ")"; ?></li>
+        <?php endforeach; ?>
+        <?php else : ?>
+        <li>No courses enrolled yet.</li>
+        <?php endif; ?>
+      </ul>
 
-      <form action="<?php echo URLROOT; ?>/users/delete" method="post" class="d-inline">
-        <input type="submit" value="Delete Profile" class="btn btn-danger" id="delete-profile-btn">
+      <a href="<?php echo URLROOT; ?>/users/edit" class="btn btn-primary">Edit Profile</a>
       </form>
     </div>
   </div>
