@@ -22,30 +22,26 @@
         <?php endif; ?>
       </ul>
 
-      <a href="<?php echo URLROOT; ?>/users/edit" class="btn btn-primary">Edit Profile</a>
-      </form>
-    </div>
-  </div>
-</div>
+      <a href="#" id="delete-profile-btn" class="btn btn-danger">Delete Profile</a>
 
-<script>
-document.getElementById('delete-profile-btn').addEventListener('click', function(e) {
-  e.preventDefault();
-  Swal.fire({
-    icon: 'error',
-    title: 'Are you sure you want to delete your profile?',
-    text: 'Once the profile is deleted, it cannot be recovered.',
-    footer: '<a href="<?php echo URLROOT; ?>/pages/contact">Need Assistance</a>',
-    showCancelButton: true,
-    confirmButtonText: 'Delete Profile',
-    cancelButtonText: 'Cancel',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-      e.target.form.submit();
-    }
-  });
-});
-</script>
+      <script>
+      document.getElementById('delete-profile-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        Swal.fire({
+          icon: 'error',
+          title: 'Are you sure you want to delete your profile?',
+          text: 'Once the profile is deleted, it cannot be recovered.',
+          footer: '<a href="<?php echo URLROOT; ?>/pages/contact">Need Assistance</a>',
+          showCancelButton: true,
+          confirmButtonText: 'Delete Profile',
+          cancelButtonText: 'Cancel',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            e.target.form.submit();
+          }
+        });
+      });
+      </script>
 
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+      <?php require APPROOT . '/views/inc/footer.php'; ?>

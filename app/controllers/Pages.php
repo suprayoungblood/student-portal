@@ -32,12 +32,13 @@ class Pages extends Controller
   {
     $courseModel = $this->model('Course');
     $courses = $courseModel->getAllCourses();
+    var_dump($courses);  // This will print the courses to the screen. Remove this after debugging.
+
 
     $data = [
       'title' => 'Available Courses',
       'courses' => $courses
     ];
-
     $this->view('pages/course', $data);
   }
 }

@@ -63,6 +63,9 @@ class User
         $this->db->query('SELECT * FROM User WHERE UserID = :id');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
+        if ($row) {
+            $row->UserID = (int) $row->UserID;  // Cast UserID to int
+        }
         return $row;
     }
 

@@ -6,7 +6,7 @@
     <tr>
       <th>Course Name</th>
       <th>Description</th>
-      <!-- You can add more columns if needed -->
+      <th>Action</th> <!-- Added header for the "Register" button -->
     </tr>
   </thead>
   <tbody>

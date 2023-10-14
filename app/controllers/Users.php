@@ -217,7 +217,7 @@ class Users extends Controller
             'enrolledCourses' => $enrolledCourses // Add this line
         ];
 
-        $this->view('users/profile', $data);
+        $this->view('pages/profile', $data);
     }
 
 

@@ -14,7 +14,6 @@ class Course
     $this->db->query("SELECT * FROM course");
     return $this->db->resultSet();
   }
-
   public function isUserRegistered($userId, $courseId)
   {
     $this->db->query("SELECT * FROM enrollment WHERE UserID = :userId AND CourseID = :courseId");
@@ -53,16 +52,21 @@ class Course
     echo "UserID: ";
     var_dump($userId);
 
-    $this->db->query("SELECT course.CourseName, course.Semester FROM course 
-                          JOIN enrollment ON course.CourseID = enrollment.CourseID
-                          WHERE enrollment.UserID = :userId");
-    $this->db->bind(':userId', $userId);
-    $result = $this->db->resultSet();
+    try {
+      $sql = "SELECT course.CourseName, course.Semester FROM course 
+                  JOIN enrollment ON course.CourseID = enrollment.CourseID
+                  WHERE enrollment.UserID = :userId";
+      $this->db->query($sql);
+      $this->db->bind(':userId', $userId);
+      $result = $this->db->resultSet();
 
-    // Dump the result
-    echo "Query Result: ";
-    var_dump($result);
+      // Dump the result
+      echo "Query Result: ";
+      var_dump($result);
 
-    return $result;
+      return $result;
+    } catch (Exception $e) {
+      die("Database Error: " . $e->getMessage());
+    }
   }
 }

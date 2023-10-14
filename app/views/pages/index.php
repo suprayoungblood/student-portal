@@ -1,9 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="jumbotron jumbotron-fluid text-center">
   <div class="container">
-
-    <img src="<?php echo URLROOT; ?>/public/img/logo.svg" alt="School Logo" style="margin-bottom: 50px" width="300"
-      height="100">
+    <!-- <img src="<?php echo URLROOT; ?>/img/logo.svg" alt="School Logo" style="margin-bottom: 50px" width="300" height="100"> -->
     <h1 class="display-3">School Portal</h1>
     <p class="lead">Empowering Students for a Brighter Future</p>
 
@@ -11,13 +9,19 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="<?php echo URLROOT; ?>/public/img/school1.jpg" class="d-block w-100" alt="School Slide 1">
+          <img src="<?php echo URLROOT; ?>/img/School 1.jpg" class="d-block w-100" alt="School Slide 1">
         </div>
         <div class="carousel-item">
-          <img src="<?php echo URLROOT; ?>/public/img/school2.jpg" class="d-block w-100" alt="School Slide 2">
+          <img src="<?php echo URLROOT; ?>/img/School 2.jpg" class="d-block w-100" alt="School Slide 2">
         </div>
         <div class="carousel-item">
-          <img src="<?php echo URLROOT; ?>/public/img/school3.jpg" class="d-block w-100" alt="School Slide 3">
+          <img src="<?php echo URLROOT; ?>/img/School 3.jpg" class="d-block w-100" alt="School Slide 3">
+        </div>
+        <div class="carousel-item">
+          <img src="<?php echo URLROOT; ?>/img/School 4.jpg" class="d-block w-100" alt="School Slide 4">
+        </div>
+        <div class="carousel-item">
+          <img src="<?php echo URLROOT; ?>/img/School 5.jpg" class="d-block w-100" alt="School Slide 5">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -40,7 +44,7 @@
       <div class="row">
         <div class="col-md-6 gx-5 mb-4">
           <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-            <img src="<?php echo URLROOT; ?>/public/img/school5.jpg" class="img-fluid" />
+            <img src="<?php echo URLROOT; ?>/img/School 6.jpg" class="img-fluid" />
             <a href="#!">
               <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
             </a>
@@ -70,7 +74,7 @@
         <div class="col-lg-4 col-md-12 mb-4">
           <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="<?php echo URLROOT; ?>/public/img/card1.jpg" class="img-fluid" />
+              <img src="<?php echo URLROOT; ?>/img/School 1.jpg" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
@@ -88,7 +92,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="<?php echo URLROOT; ?>/public/img/card2.jpg" class="img-fluid" />
+              <img src="<?php echo URLROOT; ?>/img/School 2.jpg" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
@@ -106,7 +110,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-              <img src="<?php echo URLROOT; ?>/public/img/card3.jpg" class="img-fluid" />
+              <img src="<?php echo URLROOT; ?>/img/School 3.jpg" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
